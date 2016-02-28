@@ -74,11 +74,47 @@ public class StringUtilTest {
 		System.out.println(">> " + name + "   .....");
 		
 		// arrange
-		String str = "12";
-		String expected = "12";
+		String[] strs = new String[] {"sakai",".","mitsuru"};
+		String expected = "sakai.mitsuru";
 		
 		// act
-		String actual = StringUtil.padZero(str, 2);
+		String actual = StringUtil.concatenate(strs);
+		
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testPutQuate(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+		
+		// arrange
+		String str = "sakai.mitsuru";
+		String expected = "\"sakai.mitsuru\"";
+		
+		// act
+		String actual = StringUtil.putQuote(str);
+		
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testChopLast(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+		
+		// arrange
+		String str = "sakai.mitsuru";
+		String expected = "sakai.mits";
+		
+		// act
+		String actual = StringUtil.chopLast(str,3);
 		
 		// assert
 		System.out.println(actual);

@@ -39,6 +39,34 @@ public class StringUtil {
 	 * @return
 	 */
 	public static String concatenate(String[] strs){
-		return StringUtils.join(strs,",");
+		return StringUtils.join(strs,"");
+	}
+	/**
+	 * put string in quote
+	 * @param str
+	 * @return
+	 */
+	public static String putQuote(String str){
+		StringBuilder sb = new StringBuilder();
+		sb.append("\"").append(str).append("\"");
+		return sb.toString();
+	}
+	/**
+	 * put string between brackets
+	 * @param str
+	 * @return
+	 */
+	public static String putBrackets(String str,String preBracket,String postBracket){
+		StringBuilder sb = new StringBuilder();
+		sb.append(preBracket).append(str).append(postBracket);
+		return sb.toString();
+	}
+	/**
+	 * chop string with last char size
+	 * @param str
+	 * @return
+	 */
+	public static String chopLast(String str,int size){
+		return StringUtils.substring(str, 0, str.length() - size);
 	}
 }
