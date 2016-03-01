@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.text.StrBuilder;
+
 
 /**
  * 
@@ -15,8 +17,8 @@ import org.apache.commons.lang3.ArrayUtils;
 public class ArrayUtil {
 	
 	/**
-	 * 一次元配列を二次元配列に変換する
-	 * @param arys
+	 * 一次元配列を二次元配列に変換する(String型)
+	 * @param arys 
 	 * @return
 	 */
 	public static String[][] arrayToArrayArray(String[] arys){
@@ -38,7 +40,7 @@ public class ArrayUtil {
 	}
 	
 	/**
-	 * 一次元配列keysと一次元配列valuesのセットを二次元配列に変換する
+	 * 一次元配列keysと一次元配列valuesのセットを二次元配列に変換する(String型)
 	 * @param keys
 	 * @param values
 	 * @return
@@ -78,7 +80,7 @@ public class ArrayUtil {
 	}
 	
 	/**
-	 * to Strings
+	 * to string
 	 */
 	public static String toString(Object obj){
 		if(!obj.getClass().isArray()){
@@ -86,9 +88,54 @@ public class ArrayUtil {
 		}
 		return ArrayUtils.toString(obj);
 	}
-	
+
 	/**
-	 * to Json
+	 * convert to Table
+	 */
+	public static String arrayArrayToStringTable(String[][] aryary,String separator){
+		String[][] tempAryAry = Arrays.copyOf(aryary, aryary.length);
+		int[] lens = getArrayArrayElementMaxLength(aryary);
+		for(int i=0;i < aryary.length ;i++){
+			for(int j=0;j < aryary[i].length ;j++){
+				tempAryAry[i][j] = StringUtil.padRight(aryary[i][j], lens[j]);
+			}
+		}
+		StrBuilder sb = new StrBuilder();
+		if(StringUtil.isNullOrEmpty(separator)){
+			separator = " ";
+		} else {
+			separator = " " + separator + " ";
+		}
+		for(String[] strs :tempAryAry){
+			sb.appendln(String.join(separator, strs));
+		}
+		return sb.toString();
+	}
+	
+	static int getMax(int num1,int num2){
+		return (num1 > num2 ? num1 : num2);
+	}
+	
+	static int[] getArrayArrayElementMaxLength(String[][] aryary){
+		int[] lens = new int[aryary[0].length];
+		for(String[] ary:aryary){
+			for(int i=0;i < ary.length ;i++){
+				lens[i] = getMax(lens[i],ary[i].length());
+			}
+		}
+		return lens;
+	}
+	/**
+	 * convert to html table 
+	 * @param strs
+	 * @return
+	 */
+	public static String join(String[] strs,String separator){
+		return String.join(separator, strs);
+	}
+
+	/**
+	 * convert to Json
 	 */
 	public static String toJson(Object obj){
 		if(!obj.getClass().isArray()){
@@ -96,6 +143,37 @@ public class ArrayUtil {
 		}
 		return JsonStringUtil.toJson(obj);
 	}
+	/**
+	 * convert to html table 
+	 * @param strs
+	 * @param separator
+	 * @return
+	 * XXX deal with header
+	 * XXX set indent tab 
+	 */
+	public static String arrayArrayToHtmlTable(String[][] aryary){
+		StrBuilder sb = new StrBuilder();
+		String[] tablerows = new String[aryary.length];
+		int i = 0;
+		for(String[] tr : aryary){
+			for(String td : tr){
+				sb.append(XmlStringUtil.putTag(td, HtmlConst.TD));
+			}
+			tablerows[i] = StringUtil.replace(HtmlConst.TR,"tr",sb.toString());
+			sb.clear();
+			i++;
+		}
+		return StringUtil.replace(HtmlConst.TABLE, "table", ArrayUtil.arrayToStringLines(tablerows));
+	}
 	
+	/**
+	 * array to string lines
+	 * @param lines
+	 * @return
+	 * XXX stream化
+	 */
+	public static String arrayToStringLines(String[] lines){
+		return String.join("\r\n",lines);
+	}
 	
 }

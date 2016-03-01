@@ -4,7 +4,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Strings;
 
+/**
+ * String Utilities  
+ * @author sakai.memoru
+ * 
+ */
 public class StringUtil {
+	//FIXME String.Joiner
 	
 	/**
 	 * pad right spaces
@@ -38,15 +44,26 @@ public class StringUtil {
 	 * @param strs
 	 * @return
 	 */
-	public static String concatenate(String[] strs){
-		return StringUtils.join(strs,"");
+	public static String concatenate(String[] strs,String delimiter){
+		return StringUtils.join(strs,delimiter);
 	}
+	
+	/**
+	 * join strings with delimiter
+	 * @param delimiter
+	 * @param strs
+	 * @return
+	 */
+	public static String join(String delimiter,String... strs){
+		return String.join(delimiter, strs);
+	}
+	
 	/**
 	 * put string in quote
 	 * @param str
 	 * @return
 	 */
-	public static String putQuote(String str){
+	public static String putDoubleQuote(String str){
 		StringBuilder sb = new StringBuilder();
 		sb.append("\"").append(str).append("\"");
 		return sb.toString();
@@ -61,12 +78,87 @@ public class StringUtil {
 		sb.append(preBracket).append(str).append(postBracket);
 		return sb.toString();
 	}
+	
+	/**
+	 * sub string between quote
+	 * @param str
+	 * @return
+	 */
+	public static String substringBetweenDoubleQuote(String str){
+		String quote = "\"";
+		return StringUtils.substringBetween(str, quote);
+	}
+	/**
+	 * sub string between brackets
+	 * @param str
+	 * @return
+	 */
+	public static String substringBetweenBrackets(String str,String preBracket,String postBracket){
+		return StringUtils.substringBetween(str, preBracket,postBracket);
+	}
+	
+	/**
+	 * chop string with head char size
+	 * @param str
+	 * @return
+	 */
+	public static String chopHead(String str,int size){
+		return StringUtils.substring(str, size, str.length());
+	}
 	/**
 	 * chop string with last char size
 	 * @param str
 	 * @return
 	 */
-	public static String chopLast(String str,int size){
+	public static String chopTail(String str,int size){
 		return StringUtils.substring(str, 0, str.length() - size);
 	}
+	/**
+	 * chop string with head and tail (char size = 1)
+	 * @param str
+	 * @return
+	 */
+	public static String chopDouble(String str){
+		return StringUtil.chopTail(StringUtil.chopHead(str, 1),1);
+	}
+	/**
+	 * chop string with head and tail char size
+	 * @param str
+	 * @return
+	 */
+	public static String chopHeadAndTail(String str,int preSize,int postSize){
+		return StringUtil.chopTail(StringUtil.chopHead(str, preSize),postSize);
+	}
+	/**
+	 * chop string with tag
+	 * @param str
+	 * @return
+	 */
+	public static String chopTag(String str,String tag){
+		return StringUtil.chopTail(StringUtil.chopHead(str, tag.length()),tag.length()+1);
+	}
+	
+	/**
+	 * squeeze white space and tab,etc
+	 * @param str
+	 * @return
+	 */
+	public static String squeeze(String str){
+		return str.replaceAll("\\s+", " ").trim();
+	}
+	
+	/**
+	 * 
+	 * @param text
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public static String replace(String text,String key, String value){
+		String replaceString = String.join("", "$", StringUtil.putBrackets(key, "{", "}"));
+		//System.out.println(replaceString);
+		return StringUtils.replace(text,replaceString,value); 
+	}
+	
+	
 }

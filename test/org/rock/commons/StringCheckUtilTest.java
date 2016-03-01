@@ -13,7 +13,7 @@ public class StringCheckUtilTest {
 	
 
 	@Test
-	public void testIsNumericFormatted(){
+	public void testIsNumericIntegerFormatted(){
 		String name = testName.getMethodName();
 		System.out.println("-------------------------------------------");
 		System.out.println(">> " + name + "   .....");
@@ -23,7 +23,7 @@ public class StringCheckUtilTest {
 		boolean expected = true;
 
 		// act
-		boolean actual = StringCheckUtil.isNumericFormatted(str);
+		boolean actual = StringCheckUtil.isNumericIntegerFormatted(str);
 
 		// assert
 		System.out.println(actual);
@@ -60,6 +60,64 @@ public class StringCheckUtilTest {
 
 		// act
 		boolean actual = StringCheckUtil.isMailAddress(str);
+
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+        //fail("Not yet implemented");
+	}
+	@Test
+	public void testIsQuotedTrue(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String str = "\"sakai.mitsuru\"";
+		String quote = "\"";
+		boolean expected = true;
+
+		// act
+		boolean actual = StringCheckUtil.isQuoted(str,quote);
+
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+        //fail("Not yet implemented");
+	}
+	@Test
+	public void testIsQuotedFalse(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String str = "\"sakai.mitsuru";
+		String quote = "\"";
+		boolean expected = false;
+
+		// act
+		boolean actual = StringCheckUtil.isQuoted(str,quote);
+
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+        //fail("Not yet implemented");
+	}
+	@Test
+	public void testIsBraketted(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String str = "[sakai.mitsuru]";
+		String preBracket = "[";
+		String postBracket = "]";
+		boolean expected = true;
+
+		// act
+		boolean actual = StringCheckUtil.isBranketted(str,preBracket,postBracket);
 
 		// assert
 		System.out.println(actual);

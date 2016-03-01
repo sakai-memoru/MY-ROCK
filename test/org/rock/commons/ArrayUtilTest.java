@@ -202,5 +202,164 @@ public class ArrayUtilTest {
 		assertEquals(expected, actual);
 		//fail("Not yet implemented");
 	}
+	@Test
+	public void testJoin() {
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String[] ary = new String[]{"mitsuru","sakai","misa","sakai"};
+		String separator = "|";
+		String expected = "mitsuru|sakai|misa|sakai";
+		
+		// act
+		String actual = ArrayUtil.join(ary,separator); 
+		
+		// assert
+		System.out.println(actual.toString());
+		assertEquals(expected, actual);
+		//fail("Not yet implemented");
+	}
+	@Test
+	public void testGetArrayArrayElementMaxLength() {
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String[][] aryary = new String[][]{
+			{"mitsuru","sakai"}
+		   ,{"misa","sakai"}
+		   ,{"tamotsu","sakai"}
+		};
+		int[] expecteds = new int[]{7,5};
+		
+		// act
+		int[]  actuals = ArrayUtil.getArrayArrayElementMaxLength(aryary); 
+		
+		// assert
+		System.out.println(ArrayUtil.toString(actuals));
+		assertArrayEquals(expecteds, actuals);
+		//fail("Not yet implemented");
+	}
+	@Test
+	public void testGetMax(){
+		int num1 = 5;
+		int num2 =10;
+		int expected = num2;
+		int actual = ArrayUtil.getMax(num1, num2);
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+	}
+	@Test
+	public void testToStringArrayArrayTable() {
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String[][] aryary = new String[][]{
+			{"mitsuru","sakai"}
+		   ,{"misa","sakai"}
+		   ,{"tamotsu","sakai"}
+		};
+		String separator = "";
+		
+		// act
+		String actual = ArrayUtil.arrayArrayToStringTable(aryary, separator); 
+		
+		// assert
+		System.out.println(actual);
+		//assertArrayEquals(expecteds, actuals);
+		//fail("Not yet implemented");
+	}
+	@Test
+	public void testToStringArrayArrayTable2() {
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String[][] aryary = new String[][]{
+			{"mitsuru.rock","sakai"}
+		   ,{"misa","sakai"}
+		   ,{"tamotsu","sakai"}
+		};
+		String separator = "->";
+		
+		// act
+		String actual = ArrayUtil.arrayArrayToStringTable(aryary, separator); 
+		
+		// assert
+		System.out.println(actual);
+		//assertArrayEquals(expecteds, actuals);
+		//fail("Not yet implemented");
+	}
+	@Test
+	public void testToStringArrayArrayTable3() {
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String[][] aryary = new String[][]{
+			{"mitsuru","rock","sakai"}
+		   ,{"misa","pop","sakai"}
+		   ,{"tamotsu","jazz","sakai"}
+		   ,{"kuniyuki","classics","sakai"}
+		};
+		String separator = "|";
+		
+		// act
+		String actual = ArrayUtil.arrayArrayToStringTable(aryary, separator); 
+		
+		// assert
+		System.out.println(actual);
+		//assertArrayEquals(expecteds, actuals);
+		//fail("Not yet implemented");
+	}
+	@Test
+	public void testArrayToStringLiens(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String[] ary = new String[]{"mitsuru","rock","sakai","misa","pop","sakai"};
+		String expected = "mitsuru\r\nrock\r\nsakai\r\nmisa\r\npop\r\nsakai";
+		
+		// act
+		String actual = ArrayUtil.arrayToStringLines(ary); 
+		
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+		//fail("Not yet implemented");
+		
+	}
+	@Test
+	public void testArrayArrayToHtmlTable() {
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String[][] aryary = new String[][]{
+			{"mitsuru","rock","sakai"}
+		   ,{"misa","pop","sakai"}
+		   ,{"tamotsu","jazz","sakai"}
+		   ,{"kuniyuki","classics","sakai"}
+		};
+		
+		// act
+		String actual = ArrayUtil.arrayArrayToHtmlTable(aryary); 
+		
+		// assert
+		System.out.println(actual);
+		//assertArrayEquals(expecteds, actuals);
+		//fail("Not yet implemented");
+	}
 
 }

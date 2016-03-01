@@ -68,6 +68,23 @@ public class WordUtil {
 	public static String upperUnderscoreCaseToPascalCase(String str){
 		return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, str);
 	}
+	
+	/**
+	 * convert camel case to pascal case
+	 * @param str
+	 * @return
+	 */
+	public static String camelCaseToPascalCase(String str){
+		return CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, str);
+	}
+	/**
+	 * convert pascal case to camel case
+	 * @param str
+	 * @return
+	 */
+	public static String pascalCaseToCamelCase(String str){
+		return CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, str);
+	}
 	/**
 	 * convert property name to setter method name
 	 * @param propertyName
