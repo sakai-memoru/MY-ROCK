@@ -1,5 +1,7 @@
 package org.rock.commons;
 
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Strings;
@@ -148,16 +150,34 @@ public class StringUtil {
 	}
 	
 	/**
-	 * 
+	 * replace template sentence with key and value
 	 * @param text
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public static String replace(String text,String key, String value){
+	public static String replaceTemplate(String template,String key, String value){
 		String replaceString = String.join("", "$", StringUtil.putBrackets(key, "{", "}"));
 		//System.out.println(replaceString);
-		return StringUtils.replace(text,replaceString,value); 
+		return StringUtils.replace(template,replaceString,value); 
+	}
+	/**
+	 * replace template sentence with map
+	 * @param text
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public static String replaceTemplate(String template,Map<String,String> map){
+		String retStr = template;
+		if(map != null){
+			for (Map.Entry<String, String> entry: map.entrySet()){
+				retStr = StringUtil.replaceTemplate(retStr, entry.getKey(), entry.getValue());
+			}
+		} else {
+			retStr = StringUtils.EMPTY;
+		}	
+		return retStr;
 	}
 	
 	

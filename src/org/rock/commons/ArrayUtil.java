@@ -2,6 +2,7 @@ package org.rock.commons;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -145,8 +146,7 @@ public class ArrayUtil {
 	}
 	/**
 	 * convert to html table 
-	 * @param strs
-	 * @param separator
+	 * @param aryary
 	 * @return
 	 * XXX deal with header
 	 * XXX set indent tab 
@@ -159,11 +159,11 @@ public class ArrayUtil {
 			for(String td : tr){
 				sb.append(XmlStringUtil.putTag(td, HtmlConst.TD));
 			}
-			tablerows[i] = StringUtil.replace(HtmlConst.TR,"tr",sb.toString());
+			tablerows[i] = StringUtil.replaceTemplate(HtmlConst.TR,"tr",sb.toString());
 			sb.clear();
 			i++;
 		}
-		return StringUtil.replace(HtmlConst.TABLE, "table", ArrayUtil.arrayToStringLines(tablerows));
+		return StringUtil.replaceTemplate(HtmlConst.TABLE, "table", ArrayUtil.arrayToStringLines(tablerows));
 	}
 	
 	/**
@@ -174,6 +174,117 @@ public class ArrayUtil {
 	 */
 	public static String arrayToStringLines(String[] lines){
 		return String.join("\r\n",lines);
+	}
+	
+	/**
+	 * convert to html table with Header 
+	 * @param aryary
+	 * @return
+	 * XXX deal with header
+	 * XXX set indent tab 
+	 */
+	public static String arrayArrayToHtmlTableWithHeader(String[][] aryary,String[] header){
+		
+		if(aryary[0].length != header.length){
+			throw new IllegalArgumentException("header array length is not same with array body.");
+		}
+		
+		StrBuilder sb = new StrBuilder();
+		String[] tablerows = new String[aryary.length + 1];
+		
+		// th 
+		for(String th : header){
+			sb.append(XmlStringUtil.putTag(th, HtmlConst.TH));
+		}
+		tablerows[0] = StringUtil.replaceTemplate(HtmlConst.TR,"tr",sb.toString());
+		sb.clear();
+		
+		// td 
+		int i = 1;
+		for(String[] tr : aryary){
+			for(String td : tr){
+				sb.append(XmlStringUtil.putTag(td, HtmlConst.TD));
+			}
+			tablerows[i] = StringUtil.replaceTemplate(HtmlConst.TR,"tr",sb.toString());
+			sb.clear();
+			i++;
+		}
+		return StringUtil.replaceTemplate(HtmlConst.TABLE, "table", ArrayUtil.arrayToStringLines(tablerows));
+	}
+	/**
+	 * convert to wiki table with Header 
+	 * @param aryary
+	 * @return
+	 * XXX deal with header
+	 * XXX set indent tab 
+	 */
+	public static String arrayArrayToWikiTableWithHeader(String[][] aryary,String[] header){
+		if(aryary[0].length != header.length){
+			throw new IllegalArgumentException("header array length is not same with array body.");
+		}
+		String[] tablerows = new String[aryary.length + 1];
+		// th
+		String head = ArrayUtil.join(header, "|*");
+		tablerows[0] = StringUtil.putBrackets(head, "|*", "|");
+		// td 
+		int i = 1;
+		String row = "";
+		for(String[] tr : aryary){
+			row = ArrayUtil.join(tr, "|*");
+			tablerows[i] = StringUtil.putBrackets(row, "|*", "|");
+			i++;
+		}
+		return ArrayUtil.arrayToStringLines(tablerows);
+	}
+	/**
+	 * convert to List of map with Header 
+	 * @param aryary
+	 * @param header
+	 * @return
+	 */
+	public static List<Map<Object,Object>> arrayArrayToListOfMap(String[][] aryary,String[] header){
+		if(aryary[0].length != header.length){
+			throw new IllegalArgumentException("header array length is not same with array body.");
+		}
+		List<Map<Object,Object>> list = new ArrayList<>();
+		// rows 
+		for(String[] row : aryary){
+			Map<Object,Object> map = new HashMap<>();
+			String[][] dimMap = ArrayUtil.arraysToArrayArray(header, row);
+			map = ArrayUtil.toMap(dimMap);
+			list.add(map);
+		}
+		return list;
+	}
+	/**
+	 * convert to Map of map with Header 
+	 * @param aryary
+	 * @return
+	 * XXX deal with header
+	 * XXX set indent tab 
+	 */
+	public static Map<String,Map<Object,Object>> arrayArrayToMapOfMap(String[][] aryary,String[] header,int... keyLocations ){
+		if(aryary[0].length != header.length){
+			throw new IllegalArgumentException("header array length is not same with array body.");
+		}
+		Map<String,Map<Object,Object>> retMap = new HashMap<>();
+		StrBuilder sb = new StrBuilder();
+		String key ="";
+		// rows 
+		for(String[] row : aryary){
+			// key
+			for(int loc : keyLocations){
+				sb.append(row[loc]).append(".");
+			}
+			key = StringUtil.chopTail(sb.toString(),1);
+			sb.clear();
+			// value map
+			Map<Object,Object> map = new HashMap<>();
+			String[][] dimMap = ArrayUtil.arraysToArrayArray(header, row);
+			map = ArrayUtil.toMap(dimMap);
+			retMap.put(key,map);
+		}
+		return retMap;
 	}
 	
 }

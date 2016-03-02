@@ -2,6 +2,9 @@ package org.rock.commons;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -281,7 +284,7 @@ public class StringUtilTest {
 		assertEquals(expected, actual);	
 	}
 	@Test
-	public void testReplace(){
+	public void testReplaceTemplate(){
 		String name = testName.getMethodName();
 		System.out.println("-------------------------------------------");
 		System.out.println(">> " + name + "   .....");
@@ -293,7 +296,31 @@ public class StringUtilTest {
 		String value = "rock";
 		
 		// act
-		String actual = StringUtil.replace(text,key,value);
+		String actual = StringUtil.replaceTemplate(text,key,value);
+		
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);	
+	}
+	@Test
+	public void testReplaceTemplateMap(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+		
+		// arrange
+		String template = "sakai ${middleName} mitsuru ${loverName}";
+		String expected = "sakai rock mitsuru misa";
+		String key1 = "middleName";
+		String value1 = "rock";
+		String key2 = "loverName";
+		String value2 = "misa";
+		Map<String,String> map = new HashMap<>();
+		map.put(key1, value1);
+		map.put(key2, value2);
+		
+		// act
+		String actual = StringUtil.replaceTemplate(template,map);
 		
 		// assert
 		System.out.println(actual);

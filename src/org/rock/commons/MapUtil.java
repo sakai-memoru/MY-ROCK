@@ -3,6 +3,7 @@ package org.rock.commons;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.StrBuilder;
 
 public class MapUtil {
 
@@ -49,4 +50,15 @@ public class MapUtil {
 	public static String mapToStringTable(Map<String,String> map,String separator){
 		return ArrayUtil.arrayArrayToStringTable(MapUtil.mapToArrayArray(map), separator);
 	}
+	
+	public static String toStringMapOfMap(Map<String,Map<Object,Object>> mapOfMap){
+		
+		StrBuilder sb = new StrBuilder();
+		
+		for(Map.Entry<String, Map<Object,Object>> entry :mapOfMap.entrySet()){
+			sb.append("{").append(entry.getKey()).append("=").append(entry.getValue().toString()).append("}");
+		}
+		return StringUtil.putBrackets(sb.toString(), "{", "}");
+	}
+	
 }
