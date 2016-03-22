@@ -124,4 +124,96 @@ public class StringCheckUtilTest {
 		assertEquals(expected, actual);
         //fail("Not yet implemented");
 	}
+	@Test
+	public void testLessThanByteLengthEq(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+		// arrange
+		String str = "sakai.mitsuru";
+		int byteLen = 13;
+		boolean expected = true;
+		
+		// act
+		boolean actual = StringCheckUtil.lessThanByteLength(str, byteLen);
+		
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+        //fail("Not yet implemented");
+	}
+	@Test
+	public void testLessThanByteLengthGt(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+		// arrange
+		String str = "sakai.mitsuru";
+		int byteLen = 12;
+		boolean expected = true;
+		
+		// act
+		boolean actual = StringCheckUtil.lessThanByteLength(str, byteLen);
+		
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+        //fail("Not yet implemented");
+	}
+	@Test
+	public void testLessThanByteLength2ByteEq(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+		// arrange
+		String str = "ç‚à‰è[";
+		int byteLen = 6;
+		boolean expected = true;
+		
+		// act
+		boolean actual = StringCheckUtil.lessThanByteLength(str, byteLen);
+		
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+        //fail("Not yet implemented");
+	}
+	@Test
+	public void testLessThanByteLength2ByteGt(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+		// arrange
+		String str = "ç‚à‰è[";
+		int byteLen = 5;
+		boolean expected = true;
+		
+		// act
+		boolean actual = StringCheckUtil.lessThanByteLength(str, byteLen);
+		
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+        //fail("Not yet implemented");
+	}
+	@Test
+	public void testLessThanByteLengthOnUTF16_2ByteGt(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+		// arrange
+		String str = "ç‚à‰è[";
+		int byteLen = 5;
+		boolean expected = true;
+		
+		// act
+		boolean actual = StringCheckUtil.lessThanByteLength(str, byteLen);
+		
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+        //fail("Not yet implemented");
+	}
+	
+	
 }

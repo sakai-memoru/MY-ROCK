@@ -457,5 +457,52 @@ public class ArrayUtilTest {
 		//assertArrayEquals(expecteds, actuals);
 		//fail("Not yet implemented");
 	}
+	@Test
+	public void testArrayArrayToMapOfMap2() {
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String[][] aryary = new String[][]{
+			{"mitsuru","rock","sakai"}
+		   ,{"misa","pop","sakai"}
+		   ,{"tamotsu","jazz","sakai"}
+		   ,{"kuniyuki","classics","sakai"}
+		};
+		String[] header = new String[]{
+			"firstName","middleName","secondName"};
+		
+		// act
+		Map<String,Map<Object,Object>> actual = ArrayUtil.arrayArrayToMapOfMap(aryary,header,1,2); 
+		
+		// assert
+		System.out.println(MapUtil.toStringMapOfMap(actual));
+		//assertArrayEquals(expecteds, actuals);
+		//fail("Not yet implemented");
+	}
+	@Test
+	public void testArrayArrayToMapTable() {
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String[][] aryary = new String[][]{
+			{"firstName","middleName","secondName"}
+		   ,{"mitsuru","rock","sakai"}
+		   ,{"misa","pop","sakai"}
+		   ,{"tamotsu","jazz","sakai"}
+		   ,{"kuniyuki","classics","sakai"}
+		};
+		
+		// act
+		Map<String,Map<Object,Object>> actual = ArrayUtil.arrayArrayToMapTable(aryary); 
+		
+		// assert
+		System.out.println(MapUtil.toStringMapOfMap(actual));
+		//assertArrayEquals(expecteds, actuals);
+		//fail("Not yet implemented");
+	}
 
 }

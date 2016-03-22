@@ -282,9 +282,16 @@ public class ArrayUtil {
 			Map<Object,Object> map = new HashMap<>();
 			String[][] dimMap = ArrayUtil.arraysToArrayArray(header, row);
 			map = ArrayUtil.toMap(dimMap);
+			// FIXME if exists key
 			retMap.put(key,map);
 		}
 		return retMap;
+	}
+	
+	public static Map<String,Map<Object,Object>> arrayArrayToMapTable(String[][] aryary){
+		String[] header = aryary[0];
+		String[][] aryaryBody = ArrayUtils.remove(aryary, 0);
+		return ArrayUtil.arrayArrayToMapOfMap(aryaryBody, header, 0);
 	}
 	
 }
