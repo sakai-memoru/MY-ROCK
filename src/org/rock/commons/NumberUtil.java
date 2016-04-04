@@ -14,19 +14,20 @@ import com.google.common.base.Strings;
 public class NumberUtil {
 
 	/**
-	 * FIXME
-	 * 
+	 * long to String with comma
 	 * @param lng
 	 * @return
+	 * FIXME
 	 */
 	public static String formatComma(long lng){
 		return NumberFormat.getInstance(Locale.JAPAN).format(lng);
 	}
 	
 	/**
-	 * FIXME
+	 * string to long 
 	 * @param str
 	 * @return
+	 * FIXME
 	 */
 	public static long toLong(String str){
 		String strChange = str;
@@ -37,9 +38,10 @@ public class NumberUtil {
 	}
 	
 	/**
-	 * FIXME
+	 * big decimal to string
 	 * @param str
 	 * @return
+	 * FIXME
 	 */
 	public static BigDecimal toBigDecimal(String str){
 		if(Strings.isNullOrEmpty(str)){

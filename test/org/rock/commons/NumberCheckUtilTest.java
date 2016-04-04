@@ -32,7 +32,27 @@ public class NumberCheckUtilTest {
 		// assert
 		System.out.println(actual);
 		assertEquals(expected, actual);
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
+	}
+	@Test
+	public void testCheckRange() {
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		long lng = 123345L;
+		boolean expected = true;
+		long min = 1L;
+		long max = 200000L;
+
+		// act
+		boolean actual = NumberCheckUtil.checkRange(lng,min,max);
+
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+		//fail("Not yet implemented");
 	}
 
 }

@@ -504,5 +504,43 @@ public class ArrayUtilTest {
 		//assertArrayEquals(expecteds, actuals);
 		//fail("Not yet implemented");
 	}
+	
+	@Test
+	public void testGetLastElement() {
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String[] ary = new String[]{"firstName","middleName","secondName"};
+		String expected = "secondName";
+		
+		// act
+		String actual = ArrayUtil.getLastElement(ary); 
+		
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+		//fail("Not yet implemented");
+	}
+	
+	@Test
+	public void testChopLast() {
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		String[] ary = new String[]{"firstName","middleName","secondName"};
+		String[] expecteds = new String[]{"firstName","middleName"};
+		
+		// act
+		String[] actuals = ArrayUtil.chopLast(ary); 
+		
+		// assert
+		System.out.println(ArrayUtils.toString(actuals));
+		assertArrayEquals(expecteds, actuals);
+		//fail("Not yet implemented");
+	}
 
 }

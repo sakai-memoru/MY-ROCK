@@ -2,15 +2,15 @@ package org.rock.commons;
 
 import static org.junit.Assert.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Date;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-public class MapUtilTest {
+public class DateUtilTest {
 	
 	@Rule
 	public TestName testName = new TestName();
@@ -20,20 +20,17 @@ public class MapUtilTest {
 	}
 
 	@Test
-	public void testMapToJson(){
+	public void testGetNow(){
 		String name = testName.getMethodName();
 		System.out.println("-------------------------------------------");
 		System.out.println(">> " + name + "   .....");
 
 		// arrange
-		Map<String,String> map = new HashMap<>();
-		map.put("mitsuru", "sakai");
-		map.put("misa", "sakai");
-		map.put("kuniyuki", "sakai");
-		String expected = "{\"mitsuru\"=\"sakai\",\"kuniyuki\"=\"sakai\",\"misa\"=\"sakai\"}";
+		Date dte = new Date();
+		String expected = DateFormatUtils.format(dte,"yyyy/MM/dd HH:mm:ss");
 
 		// act
-		String actual = MapUtil.mapToJson(map);
+		String actual = DateUtil.getNow(dte);
 
 		// assert
 		System.out.println(actual);
@@ -41,46 +38,53 @@ public class MapUtilTest {
         //fail("Not yet implemented");
 	}
 	@Test
-	public void testMapToStringTable(){
+	public void testGetNow2(){
 		String name = testName.getMethodName();
 		System.out.println("-------------------------------------------");
 		System.out.println(">> " + name + "   .....");
 
 		// arrange
-		Map<String,String> map = new HashMap<>();
-		map.put("mitsuru", "sakai");
-		map.put("misa", "sakai");
-		map.put("kuniyuki", "sakai");
-		String expected = "mitsuru  | sakai\r\nkuniyuki | sakai\r\nmisa     | sakai\r\n";
+		Date dte = new Date();
+		String expected = DateFormatUtils.format(dte,"yyyy/MM/dd HH:mm:ss");
 
 		// act
-		String actual = MapUtil.mapToStringTable(map,"|");
+		String actual = DateUtil.getNow();
 
 		// assert
 		System.out.println(actual);
-		System.out.println("--------------");
-		System.out.println(expected);
 		assertEquals(expected, actual);
         //fail("Not yet implemented");
 	}
 	@Test
-	public void testJoin(){
+	public void testGzetToday(){
 		String name = testName.getMethodName();
 		System.out.println("-------------------------------------------");
 		System.out.println(">> " + name + "   .....");
 
 		// arrange
-		Map<String,String> map = new HashMap<>();
-		map.put("mitsuru", "sakai");
-		map.put("misa", "sakai");
-		map.put("kuniyuki", "sakai");
-		String expected = "mitsuru:sakai,kuniyuki:sakai,misa:sakai";
-		String separator = ",";
-		String keyValueSeparator = ":";
-		String nullText = "<null>";
+		Date dte = new Date();
+		String expected = DateFormatUtils.format(dte,"yyyy/MM/dd");
 
 		// act
-		String actual = MapUtil.join(map,separator,keyValueSeparator,nullText);
+		String actual = DateUtil.getToday();
+
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);
+        //fail("Not yet implemented");
+	}
+	@Test
+	public void testGetYYYYMMDD(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+
+		// arrange
+		Date dte = new Date();
+		String expected = DateFormatUtils.format(dte,"yyyyMMdd");
+
+		// act
+		String actual = DateUtil.getYYYYMMDD(dte);
 
 		// assert
 		System.out.println(actual);

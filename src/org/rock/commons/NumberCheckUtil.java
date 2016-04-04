@@ -49,5 +49,20 @@ public class NumberCheckUtil {
 		return NumberUtils.isDigits(str);
 	}
 	
+	/**
+	 * check number between min and max
+	 * @param lng
+	 * @param minLng
+	 * @param maxLng
+	 * @return
+	 */
+	public static boolean checkRange(Long lng,Long minLng,Long maxLng){
+		if(minLng <= lng){
+			if(lng <= maxLng){
+				return true;
+			} 
+		}
+		return false;
+	}
 	
 }

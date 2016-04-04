@@ -327,6 +327,56 @@ public class StringUtilTest {
 		assertEquals(expected, actual);	
 	}
 	
+	@Test
+	public void testIndentStringBuilder(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+		
+		// arrange
+		StringBuilder sb = new StringBuilder("sakai\nmitsuru\nkubonoya\nmisa");
+		
+		// act
+		StringBuilder actual = StringUtil.indentStringBuilder(sb,4);
+		
+		// assert
+		System.out.println(actual.toString());
+		//assertEquals(expected, actual);	
+	}
+	@Test
+	public void testIndentStringBuilder2(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+		
+		// arrange
+		StringBuilder sb = new StringBuilder("sakai\nmitsuru\nkubonoya\nmisa");
+		
+		// act
+		StringBuilder actual = StringUtil.indentStringBuilder(sb,2);
+		
+		// assert
+		System.out.println(actual.toString());
+		//assertEquals(expected, actual);	
+	}
 	
+	@Test
+	public void testGetLastElement(){
+		String name = testName.getMethodName();
+		System.out.println("-------------------------------------------");
+		System.out.println(">> " + name + "   .....");
+		
+		// arrange
+		String str = "sakai.mitsuru.kubonoya.misa";
+		String expected = "misa";
+		String separator = ".";
+		
+		// act
+		String actual = StringUtil.getLastElement(str, separator);
+		
+		// assert
+		System.out.println(actual);
+		assertEquals(expected, actual);	
+	}
 	
 }

@@ -3,6 +3,7 @@ package org.rock.commons;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 
 import com.google.common.base.Strings;
 
@@ -180,5 +181,32 @@ public class StringUtil {
 		return retStr;
 	}
 	
+	/**
+	 * 
+	 * @param sb
+	 * @param tabStrNumber
+	 * @return
+	 */
+	public static StringBuilder indentStringBuilder(StringBuilder sb,int tabStrNumber){
+		StringBuilder retSb = new StringBuilder();
+		String tabString = StringUtils.repeat(" ", tabStrNumber);
+		String[] lines = StringUtils.split(sb.toString(),SystemUtils.LINE_SEPARATOR);
+		
+		for(String line : lines){
+			retSb.append(tabString).append(line).append(SystemUtils.LINE_SEPARATOR);
+		}
+		return retSb;
+	}
+	
+	/**
+	 * split string by separator and return last element
+	 * @param str
+	 * @param separator
+	 * @return
+	 */
+	public static String getLastElement(String str,String separator){
+		String[] elms = StringUtils.split(str, separator);
+		return ArrayUtil.getLastElement(elms);
+	}
 	
 }

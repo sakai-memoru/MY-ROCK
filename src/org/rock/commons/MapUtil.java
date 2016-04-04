@@ -5,6 +5,9 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrBuilder;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Joiner.MapJoiner;
+
 public class MapUtil {
 
 	/**
@@ -50,7 +53,11 @@ public class MapUtil {
 	public static String mapToStringTable(Map<String,String> map,String separator){
 		return ArrayUtil.arrayArrayToStringTable(MapUtil.mapToArrayArray(map), separator);
 	}
-	
+	/**
+	 * 
+	 * @param mapOfMap
+	 * @return
+	 */
 	public static String toStringMapOfMap(Map<String,Map<Object,Object>> mapOfMap){
 		
 		StrBuilder sb = new StrBuilder();
@@ -59,6 +66,20 @@ public class MapUtil {
 			sb.append("{").append(entry.getKey()).append("=").append(entry.getValue().toString()).append("}");
 		}
 		return StringUtil.putBrackets(sb.toString(), "{", "}");
+	}
+	
+	/**
+	 * join 
+	 * wrap goava map joiner
+	 * @param map
+	 * @param separator
+	 * @param keyValueSeparator
+	 * @param nullText
+	 * @return
+	 */
+	public static String join(Map<String,String> map,String separator,String keyValueSeparator,String nullText){
+		MapJoiner mapJoiner = Joiner.on(separator).withKeyValueSeparator(keyValueSeparator).useForNull(nullText);
+		return mapJoiner.join(map);
 	}
 	
 }

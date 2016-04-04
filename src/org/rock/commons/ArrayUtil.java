@@ -11,7 +11,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 
 
 /**
- * 
+ * utility for array
  * @author sakai.memoru
  * XXX generic ‘Î‰ž
  */
@@ -288,10 +288,35 @@ public class ArrayUtil {
 		return retMap;
 	}
 	
+	/**
+	 * 
+	 * @param aryary
+	 * @return
+	 */
 	public static Map<String,Map<Object,Object>> arrayArrayToMapTable(String[][] aryary){
 		String[] header = aryary[0];
 		String[][] aryaryBody = ArrayUtils.remove(aryary, 0);
 		return ArrayUtil.arrayArrayToMapOfMap(aryaryBody, header, 0);
+	}
+	
+	/**
+	 * 
+	 * @param ary
+	 * @return
+	 * FIXME Generic
+	 */
+	public static String getLastElement(String[] ary){
+		return ary[ary.length-1];
+	}
+	
+	/**
+	 * chop array 
+	 * @param ary
+	 * @return
+	 * FIXME Generic
+	 */
+	public static String[] chopLast(String[] ary){
+		return ArrayUtils.remove(ary, ary.length - 1);
 	}
 	
 }
